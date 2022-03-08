@@ -1,5 +1,6 @@
 require("dotenv").config()
 
+
 const API_URL = process.env.API_URL
 const PUBLIC_KEY = process.env.PUBLIC_KEY
 const PRIVATE_KEY = process.env.PRIVATE_KEY
@@ -7,7 +8,7 @@ const { createAlchemyWeb3 } = require("@alch/alchemy-web3")
 const web3 = createAlchemyWeb3(API_URL)
 
 
-const contract = require("../artifacts/contracts/ElephNFT.sol/ElephNFT.json")
+const contract = require("../artifacts/contracts/NFTmarket.sol/NFTmarket.json")
 const contractAddress = "0x89E926d08Aa7191d13fF0cd7FA6B40D62fD79edD"
 const nftContract = new web3.eth.Contract(contract.abi, contractAddress)
 
@@ -51,7 +52,7 @@ async function mintNFT(tokenURI) {
         console.log(" Promise failed:", err)
     })
 }
-
+console.log(PUBLIC_KEY);
 
     mintNFT(
         "https://gateway.pinata.cloud/ipfs/QmYQVX1hN5ACgiDNcKrTyNAAnGLybpfBH59aGaJ19DFiWz"

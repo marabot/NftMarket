@@ -4,6 +4,7 @@ import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
 
+
 contract NFTmarket{
 
     mapping (uint => NFT) nftById;
@@ -11,8 +12,8 @@ contract NFTmarket{
 
     mapping(uint=> Offer) offerById;
     mapping(uint=> uint[]) offerIdByNft;
-    mapping(address=> uint[]) offerIdByOwner;
-
+    mapping(address=> uint[]) offerIdByOwner;                           
+                               
     address admin;
     uint nftIdCount;
     uint offerIdCount;
@@ -102,8 +103,14 @@ contract NFTmarket{
        }
     }
 
-    function getNFTById(uint id) external view returns (NFT memory){        
-        return  nftById[id];
+    function getAllNFTs() external view returns (NFT[] memory){       
+        NFT[] memory ret= new NFT[](nftIdCount);
+        for(uint i =0 ; i< nftIdCount;i++)
+        {
+            ret[i] = nftById[i];
+
+        } 
+        return  ret;    
     }
 
     function getOffersByNFT(uint _nftId) external view returns(Offer[] memory){
