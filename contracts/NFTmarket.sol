@@ -46,14 +46,14 @@ contract NFTmarket{
     function depositNFT(address _contract , uint _tokenId, uint _price) external
     returns (uint)
     {
-        nftIdCount++;
+        
         // verif owner à faire
         nftById[nftIdCount] = NFT(nftIdCount,_contract,_tokenId, _price, msg.sender, true);
         uint[] storage senderNfts =  nftIdByOwner[msg.sender];
         senderNfts.push(nftIdCount);
         emit NFTDepositEvent(_contract, _tokenId, _price);
-        
-        return nftIdCount;
+        nftIdCount++;
+        return nftIdCount-1;
     }
 
     function newOffer (uint _nftId, uint _price, uint _endTime)  external payable {
